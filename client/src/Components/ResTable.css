@@ -1,0 +1,44 @@
+
+/* search results */
+/* table stalying */
+
+
+.res-table {
+    text-align: left;
+  }
+  
+  .res-table-h {
+    font-size: 20px;
+  }
+  
+  .res-table-r > td {
+      color: black;
+  }
+  
+  .res-table-r > td {
+      word-break: break-word;
+    font-family: sans-serif;
+  }
+  
+  .header:hover {
+    color: rgb(30, 30, 252);
+    text-decoration: none;
+  }
+  
+  .header{
+    color: rgb(30, 30, 252);
+  }
+  
+  .link {
+      color: rgb(29, 77, 29);
+      font-size: 14px;
+  }
+  
+  .link:hover {
+    color: rgb(49, 110, 49);
+  }
+  
+  .description {
+      color: black;
+      font-size: 14px;
+  }

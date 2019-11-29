@@ -1,0 +1,63 @@
+.res-checkbox {
+    margin-top: 8px;
+}
+
+.results {
+    display: inline-flex;
+}
+
+
+.download-btn {
+    display: block;
+    overflow: hidden;
+    border-width: 0;
+    outline: none;
+    /* box-shadow: 0 1px 4px rgba(0, 0, 0, .6); */
+    margin-left: 6px;
+    padding: 0;
+    border-radius: 4px;
+    background-color: #f4f8fb;
+    color: #636363;
+    transition: background-color .3s;
+  }
+
+  .download-btn span {
+    display: block;
+    padding: 0px 4px;
+  }
+  
+
+  .checkbox-outerbox {
+    align-items: flex-start;
+    border-bottom: 1px solid #bebebe;
+  }
+
+  .download-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 33px;
+  }
+  
+  .download-icons  { 
+    display: flex;
+    margin-left: 50px;
+  }
+  
+  .download-btn:hover, .download-btn:focus {
+    color: black;
+    background: #e0e5e8;
+  }
+
+  .downloadBadge {
+    position: absolute;
+    top: 0px;
+    left: 67px;
+    color: #333333;
+    /* background: #535754; */
+    width: 28px;
+    height: 24px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: 1rem;
+  }
