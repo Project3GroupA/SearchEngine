@@ -35,10 +35,10 @@ export default class NavBar extends React.Component {
     }
 
 
-    renderBrowserSpecs(){
+    renderIndexPage(){
         return(
             <div className="browser">
-                <Link className="" to="/browserspecs">Browser</Link>
+                <Link className="" to="/IndexPage">IndexPage</Link>
             </div>
         );
     }
@@ -51,15 +51,19 @@ export default class NavBar extends React.Component {
                     <img src={aboutme} className="about-me-icon rounded-circle" alt=""></img>    
                 </div>
                 <div className="dropdown-menu icon-dropdown-menu">
-                        <h6 className="dropdown-header">Developer</h6>
+                        <h6 className="dropdown-header">Developers</h6>
+                        <div className="dropdown-divider"></div>
                         <div className="dropdown-item" >Nelson Zeas</div>
                         <a className="dropdown-item" href="https://github.com/zeasnelson">Github</a>
-                        <div className="dropdown-divider"></div>
-                        <h6 className="dropdown-header">Contact Me</h6>
-                        <div className="dropdown-item" >zeasnelson@gmail.com</div>
                         <a className="dropdown-item" href="https://www.linkedin.com/in/zeasnelson/">LinkedIn</a>
+                        <div className="dropdown-item" >zeasnelson@gmail.com</div>
                         <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" href="https://github.com/zeasnelson/google-search-api">Source Code</a>
+                        <div className="dropdown-item" >Tyron Samaroo</div>
+                        <a className="dropdown-item" href="https://github.com/TyronSamaroo">Github</a>
+                        <a className="dropdown-item" href="https://www.linkedin.com/in/TyronSamaroo/">LinkedIn</a>
+                        <div className="dropdown-item" >Tyronsamaroo@gmail.com</div>
+                        <div className="dropdown-divider"></div>
+                        <a className="dropdown-item" href="https://github.com/Project3GroupA/SearchEngine.git">Source Code</a>
                 </div>
             </div>
         );
@@ -71,7 +75,7 @@ export default class NavBar extends React.Component {
                     <div className="col-12 nav-links-box">
                         {/* <div className="nav-links-box"> */}
                             {this.renderHome()}
-                            {this.renderBrowserSpecs()}
+                            {this.renderIndexPage()}
                             {this.renderCourseLinks()}
                             {this.renderAboutMeIcon()}
                         {/* </div> */}
