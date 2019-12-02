@@ -1,11 +1,8 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'search_user',
-  host: 'localhost',
-  database: 'searchDDB',
-  password: 'search_pass',
-  post: 5432
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
 })
 
 pool.connect(function(err) {
