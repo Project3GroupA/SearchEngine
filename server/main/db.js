@@ -1,17 +1,14 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  user: 'ezihmesjrmyrom',
+  host: 'ec2-54-235-248-185.compute-1.amazonaws.com',
+  database: 'dc2b7ulp2oqva3',
+  password: '99dbaa61cfb30224c62ddb235b961eb88165352c1b95b93cc8ce33fe10c6644b',
   ssl: true,
+  post: 5432
+  
 })
-
-pool.connect(function(err) {
-  if (err) {
-    return console.error('error: ' + err.message);
-  }
- 
-  console.log('Connected to the Postgres server.');
-});
 
 
   const search = (request, response) => {

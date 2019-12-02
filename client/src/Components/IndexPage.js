@@ -130,10 +130,11 @@ export default class IndexPage extends React.Component {
    
   }
   handleSubmit(event) {
+    event.preventDefault();
     alert('A URL was submitted: ' + this.state.url);
     this.indexSite();
     console.log(this.indexSite());
-    event.preventDefault();
+    
   }
   renderIcon(value, id){
     return(
