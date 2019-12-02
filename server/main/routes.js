@@ -23,7 +23,7 @@ router.get('/api/search/listurl' ,(req,ress)=>{
 
 })
 router.get('/api/search/terms' ,(req,ress)=>{
-    db.pool.query('SELECT word.word_name, page_word.freq FROM word INNER JOIN page_word ON word.word_id=page_word.page_word_id',(err,res) =>{
+    db.pool.query('SELECT word.word_name, page_word.freq FROM word INNER JOIN page_word ON word.word_id=page_word.page_word_id LIMIT 10',(err,res) =>{
         if (err) {
             console.log(err.stack)
         } else {
