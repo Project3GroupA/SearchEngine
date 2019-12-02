@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "private": true,
   "scripts": {
-    "start": "node server",
+    "start": "node server/",
     "build": "cd react-ui/ && npm install && npm run build",
     "devstart": "nodemon ./bin/www"
   },
