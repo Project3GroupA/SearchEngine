@@ -1,20 +1,12 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'search_user',
+  user: 'username',
   host: 'localhost',
-  database: 'searchDDB',
-  password: 'search_pass',
+  database: 'databasename',
+  password: 'password',
   post: 5432
 })
-
-pool.connect(function(err) {
-  if (err) {
-    return console.error('error: ' + err.message);
-  }
- 
-  console.log('Connected to the Postgres server.');
-});
 
 
   const search = (request, response) => {
