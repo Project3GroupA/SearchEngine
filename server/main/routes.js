@@ -19,7 +19,6 @@ router.get('/api/search/listurl' ,(req,ress)=>{
             ress.status(200).json(res.rows);
         }
     })
-    
 
 })
 router.get('/api/search/terms' ,(req,ress)=>{

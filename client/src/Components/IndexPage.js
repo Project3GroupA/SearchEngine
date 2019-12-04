@@ -51,15 +51,6 @@ export default class IndexPage extends React.Component {
 
 
     axios.get('/api/search/terms')
-    .then((response) =>{
-      let termInfo = response.data;
-      console.log(response.data)
-
-      for(let i = 0; i < response.data.length; i++){
-        this.setState({terms: [...this.state.terms,response.data[i]]})
-
-      }
-    })
 
     
   }
@@ -160,9 +151,8 @@ export default class IndexPage extends React.Component {
           {/* {console.log("Value "+ this.state.listUrl)}
           {console.log("Value "+ this.state.listTime)}
           {console.log("Value "+ this.state.listNum)} */}
-          {/* {
-          // console.log(this.state.listUrl)}
-          console.log(this.state.terms)} */}
+          {
+          console.log(this.state.listUrl)}
 
 
           
@@ -194,7 +184,6 @@ export default class IndexPage extends React.Component {
           />
 
         </form>
-        <br></br>
         
         <div>
           <table className="ui celled table">
@@ -213,31 +202,6 @@ export default class IndexPage extends React.Component {
             <td data-label="Name">{item.page_id}</td>
             <td data-label="Age">{item.url}</td>
             <td data-label="Job">{item.time_to_index}</td>
-          </tr>)}
-      
-          
-            </tbody>
-          </table>
-        </div>
-        <br></br>
-
-        <div>
-          <table className="ui celled table">
-            <thead>
-              <tr>
-                  <th>Term</th>
-                  <th>Number of Occurances</th>
-                 
-              </tr>
-            
-            </thead>
-            <tbody>
-              
-          {this.state.terms.map(item =>
-          <tr>
-            <td data-label="Name">{item.word_name}</td>
-            <td data-label="Age">{item.freq}</td>
-           
           </tr>)}
       
           
