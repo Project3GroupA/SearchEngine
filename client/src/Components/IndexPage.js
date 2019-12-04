@@ -3,125 +3,34 @@ import "./BrowserSpecs.css";
 import axios from "axios";
 import glogo from "../assets/images/glogo.png";
 
-
-
 export default class IndexPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = 
-    {  url: '',
-       tableData: [],
-       listNum: [],
-       listUrl: [],
-       listTime:[],
-       terms:[],
-
-       
-
-    
-
+    this.state = {
+      url: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    axios.get('/api/search/listurl')
-    .then((response) =>{
-      //const url = response.data
-      //console.log(url)
-      //Using spread operator
-      //console.log(response.data)
-      //let json = JSON.stringify(response.data)
-      //console.log(json)
-      let json = response.data;
-      //console.log(JSON.stringify(json[2]))
-      //this.setState({tableData: json});
-      //console.log(this.state.tableData);
-
-      console.log(typeof json)
-      for(let i = 0; i < response.data.length; i++){
-      this.setState({tableData: [...this.state.tableData,response.data[i]]})
-      this.setState({listNum: [...this.state.listNum, response.data[i].page_id]})
-      this.setState({listUrl: [...this.state.listUrl, response.data[i].url]})
-      this.setState({listTime: [...this.state.listTime, response.data[i].time_to_index]})
-      }
-    
-    })
-
-
-    axios.get('/api/search/terms')
-
-    
-  }
-  
-
-  // loadData = () =>{
-  //   axios.get('/api/search/listurl')
-  //   .then((response) =>{
-  //     //const url = response.data
-  //     //console.log(url)
-  //     //Using spread operator
-  //     //console.log(response.data)
-  //     //let json = JSON.stringify(response.data)
-  //     //console.log(json)
-  //     let json = response.data;
-  //     //console.log(JSON.stringify(json[2]))
-  //     //this.setState({tableData: json});
-  //     //console.log(this.state.tableData);
-
-  //     console.log(typeof json)
-  //     for(let i = 0; i < response.data.length; i++){
-  //     this.setState({tableData: [...this.state.tableData, JSON.stringify(response.data[i])]})
-  //     this.setState({listNum: [...this.state.listNum, response.data[i].page_id]})
-  //     this.setState({listUrl: [...this.state.listUrl, response.data[i].url]})
-  //     this.setState({listTime: [...this.state.listTime, response.data[i].time_to_index]})
-  //     }
-    
-  //   })
+  // componentDidMount() {
 
   // }
 
   indexSite = () => {
     axios
       .post("/api/post/crawl", {
-        name: this.state.url
+        name: this.state.value
       })
       .then(response => console.log(this.state.url))
       .catch(err => console.log("ERROR GIVEN: + " + err));
   };
-  
-  // parseData = () =>{
-  //   axios.get('/api/search/listurl')
-  //     .then((response) =>{
-        
-
-  //       const url = response.data
-  //       this.setState({url})
-
-    
-       
-     
-
-        
-      
-
-  //     })
-  //     .catch(err => console.log(err));
-  // }
-
-
-
-
-
   handleChange(event) {
-    
     this.setState({ url: event.target.value });
-    console.log(this.state.url);
-   
+    console.log("ok")
   }
   handleSubmit(event) {
-    alert('A URL was submitted: ' + this.state.url);
+    //alert('A URL was submitted: ' + this.state.value);
     this.indexSite();
     console.log(this.indexSite());
     event.preventDefault();
@@ -140,29 +49,11 @@ export default class IndexPage extends React.Component {
     );
             
   }
-  
  
-  //listOfUrl()
+
   render() {
-    
     return (
       <div>
-        
-          {/* {console.log("Value "+ this.state.listUrl)}
-          {console.log("Value "+ this.state.listTime)}
-          {console.log("Value "+ this.state.listNum)} */}
-          {
-          console.log(this.state.listUrl)}
-
-
-          
-          
-          
-
-        {/* <ul>
-          {this.state.tableData.map(item =>
-          <li>{item.url}</li>)}
-        </ul> */}
         <form onSubmit={this.handleSubmit}
           className={
             this.state.searchPosTop
@@ -179,58 +70,21 @@ export default class IndexPage extends React.Component {
             placeholder={"Index Website Here.."}
             value={this.state.value}
             onChange={this.handleChange}
+            onKeyDown={this.handleChange}
             //onClick={this.handleSubmit}
             type="text"
           />
 
         </form>
-        
-        <div>
-          <table className="ui celled table">
-            <thead>
-              <tr>
-                  <th>Number of Results</th>
-                  <th>User Search</th>
-                  <th>Time</th>
-              </tr>
-            
-            </thead>
-            <tbody>
-              
-          {this.state.tableData.map(item =>
-          <tr>
-            <td data-label="Name">{item.page_id}</td>
-            <td data-label="Age">{item.url}</td>
-            <td data-label="Job">{item.time_to_index}</td>
-          </tr>)}
-      
-          
-            </tbody>
-          </table>
+        <div className="tables">
+          <div className="row browser-tables text-center">
+            <div>{this.state.data}</div>
+            <button onClick={() => this.indexSite()} type="button">
+              <span>call api</span>
+            </button>
+          </div>
         </div>
-      
       </div>
     );
   }
-}
-
-function tableData(){
- 
-  return( 
-
-       <tr>
-            <td data-label="Name">A</td>
-            <td data-label="Age">C</td>
-            <td data-label="Job">C</td>
-            
-          </tr>
-
-
-   
-     
-         
-   
-          
- );
- 
 }
