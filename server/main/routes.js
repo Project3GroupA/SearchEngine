@@ -38,7 +38,7 @@ router.get('/api/search/total' ,(req,ress)=>{
     db.pool.query(`SELECT 
 	(SELECT COUNT(page_id) FROM PAGE) as Websites,
 	(SELECT COUNT(word_id) FROM PAGE_WORD) as UniqueWords,
-	(SELECT SUM(time_to_search) FROM SEARCH) as IndexTime,
+	(SELECT SUM(time_to_index) FROM PAGE) as IndexTime,
 	(SELECT COUNT(terms) FROM SEARCH) as SearchQuery`,(err,res) =>{
         if (err) {
             console.log(err.stack)
