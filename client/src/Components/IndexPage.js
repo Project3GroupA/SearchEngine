@@ -178,11 +178,7 @@ export default class IndexPage extends React.Component {
           {console.log("Value "+ this.state.listNum)} */}
           {/* {
           // console.log(this.state.listUrl)}
-          console.log(this.state.terms)} */}
-
-
-          
-          
+          console.log(this.state.terms)} */}   
           
 
         {/* <ul>
