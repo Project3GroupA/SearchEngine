@@ -12,6 +12,7 @@ const pool = new Pool({
 
 
 
+
 const search = (request, response) => {
 
   let searchQuery = request.query.searchQuery;
