@@ -40,7 +40,7 @@ export default class IndexPage extends React.Component {
       //this.setState({tableData: json});
       //console.log(this.state.tableData);
 
-      console.log(json)
+      //console.log(json)
       for(let i = 0; i < response.data.length; i++){
       this.setState({tableData: [...this.state.tableData,response.data[i]]})
       this.setState({listNum: [...this.state.listNum, response.data[i].page_id]})
@@ -54,7 +54,7 @@ export default class IndexPage extends React.Component {
     axios.get('/api/search/terms')
     .then((response) =>{
       let termInfo = response.data;
-      console.log(response.data)
+      //console.log(response.data)
 
       for(let i = 0; i < response.data.length; i++){
         this.setState({terms: [...this.state.terms,response.data[i]]})
@@ -63,7 +63,7 @@ export default class IndexPage extends React.Component {
     })
     axios.get('/api/search/total')
     .then((response) =>{
-      console.log(response.data)
+      //console.log(response.data)
 
       for(let i = 0; i < response.data.length; i++){
         this.setState({total: [...this.state.total,response.data[i]]})
