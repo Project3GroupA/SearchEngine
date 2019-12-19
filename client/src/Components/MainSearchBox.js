@@ -1,5 +1,5 @@
 import React from 'react';
-import glogo from '../assets/images/glogo.png';
+import sara from '../assets/images/icon.png';
 import upload from '../assets/images/upload.png';
 import './MainSearchBox.css'
 import Search from './Search';
@@ -15,7 +15,7 @@ class MainSearchBox extends React.Component{
       searchPosTop : false,
       googleSearchQuery : '',
       renderTechStack : true,
-      errorMsg: "ONLY QCSV FORMAT SUPPORTED!"
+      errorMsg: ""
     }
 
     this.inputString = '';
@@ -126,7 +126,7 @@ class MainSearchBox extends React.Component{
 
         <div className='icon-outer-box'>
           <div  className='icon-inner-box'>
-            {this.renderIcon(glogo, 13)}
+            {this.renderIcon(sara, 13)}
           </div>
         </div>
         <input

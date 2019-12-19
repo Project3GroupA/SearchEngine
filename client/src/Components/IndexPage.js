@@ -1,7 +1,7 @@
 import React from "react";
 import "./BrowserSpecs.css";
 import axios from "axios";
-import glogo from "../assets/images/glogo.png";
+import iceman from "../assets/images/icon.png";
 
 
 
@@ -15,6 +15,7 @@ export default class IndexPage extends React.Component {
        listUrl: [],
        listTime:[],
        terms:[],
+       total:[],
 
        
 
@@ -39,7 +40,7 @@ export default class IndexPage extends React.Component {
       //this.setState({tableData: json});
       //console.log(this.state.tableData);
 
-      console.log(typeof json)
+      //console.log(json)
       for(let i = 0; i < response.data.length; i++){
       this.setState({tableData: [...this.state.tableData,response.data[i]]})
       this.setState({listNum: [...this.state.listNum, response.data[i].page_id]})
@@ -53,13 +54,23 @@ export default class IndexPage extends React.Component {
     axios.get('/api/search/terms')
     .then((response) =>{
       let termInfo = response.data;
-      console.log(response.data)
+      //console.log(response.data)
 
       for(let i = 0; i < response.data.length; i++){
         this.setState({terms: [...this.state.terms,response.data[i]]})
 
       }
     })
+    axios.get('/api/search/total')
+    .then((response) =>{
+      //console.log(response.data)
+
+      for(let i = 0; i < response.data.length; i++){
+        this.setState({total: [...this.state.total,response.data[i]]})
+
+      }
+    })
+
 
     
   }
@@ -130,10 +141,11 @@ export default class IndexPage extends React.Component {
    
   }
   handleSubmit(event) {
+    event.preventDefault();
     alert('A URL was submitted: ' + this.state.url);
     this.indexSite();
     console.log(this.indexSite());
-    event.preventDefault();
+    
   }
   renderIcon(value, id){
     return(
@@ -155,24 +167,25 @@ export default class IndexPage extends React.Component {
   render() {
     
     return (
-      <div>
+      <div className='container'>
+        <div className="row h-100">
+          <div className="col-sm-12">
+            <div className="d-flex justify-content-center"> 
+              <div className="col-12 mt-3 ">
         
           {/* {console.log("Value "+ this.state.listUrl)}
           {console.log("Value "+ this.state.listTime)}
           {console.log("Value "+ this.state.listNum)} */}
           {/* {
           // console.log(this.state.listUrl)}
-          console.log(this.state.terms)} */}
-
-
-          
-          
+          console.log(this.state.terms)} */}   
           
 
         {/* <ul>
           {this.state.tableData.map(item =>
           <li>{item.url}</li>)}
         </ul> */}
+      
         <form onSubmit={this.handleSubmit}
           className={
             this.state.searchPosTop
@@ -181,7 +194,7 @@ export default class IndexPage extends React.Component {
           }
         >
           <div className="icon-outer-box">
-            <div className="icon-inner-box">{this.renderIcon(glogo, 13)}</div>
+            <div className="icon-inner-box">{this.renderIcon(iceman, 13)}</div>
           </div>
           <input
             
@@ -194,57 +207,78 @@ export default class IndexPage extends React.Component {
           />
 
         </form>
+       
         <br></br>
         
-        <div>
+          <table className="ui celled table">
+            <thead>
+              <tr>
+                  <th>Total Number of Websites</th>
+                  <th>Total Number of Unique Words</th>
+                  <th>Total Number of User Search Query</th>
+                  <th>Total Number of Index Time</th>
+
+              </tr>
+            </thead>
+            <tbody>    
+          {this.state.total.map(total =>
+          <tr>
+            <td data-label="Result">{total.websites}</td>
+            <td data-label="Search">{total.uniquewords}</td>
+            <td data-label="Query">{total.searchquery}</td>
+            <td data-label="Time">{total.indextime}</td>
+          </tr>)}
+            </tbody>
+          </table>
+      
+        
+      
           <table className="ui celled table">
             <thead>
               <tr>
                   <th>Number of Results</th>
                   <th>User Search</th>
                   <th>Time</th>
-              </tr>
-            
+              </tr>       
             </thead>
-            <tbody>
-              
+            <tbody>             
           {this.state.tableData.map(item =>
           <tr>
-            <td data-label="Name">{item.page_id}</td>
-            <td data-label="Age">{item.url}</td>
-            <td data-label="Job">{item.time_to_index}</td>
-          </tr>)}
-      
-          
+            <td data-label="Result">{item.page_id}</td>
+            <td data-label="Search">{item.url}</td>
+            <td data-label="Time">{item.time_to_index}</td>
+          </tr>)}      
             </tbody>
           </table>
-        </div>
+        
         <br></br>
 
-        <div>
+        
           <table className="ui celled table">
             <thead>
               <tr>
                   <th>Term</th>
-                  <th>Number of Occurances</th>
+                  <th>Number of Results</th>
+                  <th>Search Date</th>
                  
-              </tr>
-            
+              </tr>         
             </thead>
-            <tbody>
-              
+            <tbody>          
           {this.state.terms.map(item =>
           <tr>
-            <td data-label="Name">{item.word_name}</td>
-            <td data-label="Age">{item.freq}</td>
+            <td data-label="Term">{item.terms}</td>
+            <td data-label="Freq">{item.count}</td>
+            <td data-label="Data">{item.search_date}</td>
            
           </tr>)}
-      
-          
             </tbody>
           </table>
-        </div>
+        
       
+      </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
