@@ -167,24 +167,25 @@ export default class IndexPage extends React.Component {
   render() {
     
     return (
-      <div className="container">
+      <div className='container'>
+        <div className="row h-100">
+          <div className="col-sm-12">
+            <div className="d-flex justify-content-center"> 
+              <div className="col-12 mt-3">
         
           {/* {console.log("Value "+ this.state.listUrl)}
           {console.log("Value "+ this.state.listTime)}
           {console.log("Value "+ this.state.listNum)} */}
           {/* {
           // console.log(this.state.listUrl)}
-          console.log(this.state.terms)} */}
-
-
-          
-          
+          console.log(this.state.terms)} */}   
           
 
         {/* <ul>
           {this.state.tableData.map(item =>
           <li>{item.url}</li>)}
         </ul> */}
+        <div className="col-12 text-center mt-3">
         <form onSubmit={this.handleSubmit}
           className={
             this.state.searchPosTop
@@ -206,6 +207,7 @@ export default class IndexPage extends React.Component {
           />
 
         </form>
+        </div>
         <br></br>
         <div>
           <table className="ui celled table">
@@ -285,6 +287,10 @@ export default class IndexPage extends React.Component {
           </table>
         </div>
       
+      </div>
+      </div>
+      </div>
+      </div>
       </div>
     );
   }
