@@ -3,11 +3,16 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const pool = new Pool({
-  user: 'ezihmesjrmyrom',
-  host: 'ec2-54-235-248-185.compute-1.amazonaws.com',
-  database: 'dc2b7ulp2oqva3',
-  password: '99dbaa61cfb30224c62ddb235b961eb88165352c1b95b93cc8ce33fe10c6644b',
-  post: 5432
+  // user: 'ezihmesjrmyrom',
+  // host: 'ec2-54-235-248-185.compute-1.amazonaws.com',
+  // database: 'dc2b7ulp2oqva3',
+  // password: '99dbaa61cfb30224c62ddb235b961eb88165352c1b95b93cc8ce33fe10c6644b',
+  post: 5432,
+
+  user: process.env.localuser,
+  host: 'localhost',
+  database: process.env.localdb,
+  password:process.env.localpassword
 })
 
 
