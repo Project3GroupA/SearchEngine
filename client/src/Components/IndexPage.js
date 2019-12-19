@@ -39,7 +39,7 @@ export default class IndexPage extends React.Component {
       //this.setState({tableData: json});
       //console.log(this.state.tableData);
 
-      console.log(typeof json)
+      console.log(json)
       for(let i = 0; i < response.data.length; i++){
       this.setState({tableData: [...this.state.tableData,response.data[i]]})
       this.setState({listNum: [...this.state.listNum, response.data[i].page_id]})
@@ -156,7 +156,7 @@ export default class IndexPage extends React.Component {
   render() {
     
     return (
-      <div>
+      <div className="container">
         
           {/* {console.log("Value "+ this.state.listUrl)}
           {console.log("Value "+ this.state.listTime)}
@@ -211,9 +211,9 @@ export default class IndexPage extends React.Component {
               
           {this.state.tableData.map(item =>
           <tr>
-            <td data-label="Name">{item.page_id}</td>
-            <td data-label="Age">{item.url}</td>
-            <td data-label="Job">{item.time_to_index}</td>
+            <td data-label="Result">{item.page_id}</td>
+            <td data-label="Search">{item.url}</td>
+            <td data-label="Time">{item.time_to_index}</td>
           </tr>)}
       
           
@@ -228,6 +228,7 @@ export default class IndexPage extends React.Component {
               <tr>
                   <th>Term</th>
                   <th>Number of Occurances</th>
+                  <th>Search Date</th>
                  
               </tr>
             
@@ -236,8 +237,9 @@ export default class IndexPage extends React.Component {
               
           {this.state.terms.map(item =>
           <tr>
-            <td data-label="Name">{item.word_name}</td>
-            <td data-label="Age">{item.freq}</td>
+            <td data-label="Term">{item.terms}</td>
+            <td data-label="Freq">{item.count}</td>
+            <td data-label="Freq">{item.search_date}</td>
            
           </tr>)}
       
