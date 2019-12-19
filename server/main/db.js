@@ -3,12 +3,13 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const pool = new Pool({
-  user: 'nzeas',
+  user: process.env.localuser,
   host: 'localhost',
-  database: 'cs355db',
-  password: '2493',
+  database: process.env.localdb,
+  password: process.env.localpassword,
   post: 5432
 })
+
 
 
 const search = (request, response) => {

@@ -34,6 +34,21 @@ router.get('/api/search/terms' ,(req,ress)=>{
     })
 
 })
+router.get('/api/search/total' ,(req,ress)=>{
+    db.pool.query(`SELECT 
+	(SELECT COUNT(page_id) FROM PAGE) as Websites,
+	(SELECT COUNT(word_id) FROM PAGE_WORD) as UniqueWords,
+	(SELECT SUM(time_to_search) FROM SEARCH) as IndexTime,
+	(SELECT COUNT(terms) FROM SEARCH) as SearchQuery`,(err,res) =>{
+        if (err) {
+            console.log(err.stack)
+        } else {
+            //let list = JSON.stringify(res.rows);
+            ress.status(200).json(res.rows);
+        }
+    })
+
+})
 
 
 

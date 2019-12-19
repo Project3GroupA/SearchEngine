@@ -1,7 +1,7 @@
 import React from "react";
 import "./BrowserSpecs.css";
 import axios from "axios";
-import glogo from "../assets/images/glogo.png";
+import iceman from "../assets/images/icon.png";
 
 
 
@@ -15,6 +15,7 @@ export default class IndexPage extends React.Component {
        listUrl: [],
        listTime:[],
        terms:[],
+       total:[],
 
        
 
@@ -60,6 +61,16 @@ export default class IndexPage extends React.Component {
 
       }
     })
+    axios.get('/api/search/total')
+    .then((response) =>{
+      console.log(response.data)
+
+      for(let i = 0; i < response.data.length; i++){
+        this.setState({total: [...this.state.total,response.data[i]]})
+
+      }
+    })
+
 
     
   }
@@ -182,7 +193,7 @@ export default class IndexPage extends React.Component {
           }
         >
           <div className="icon-outer-box">
-            <div className="icon-inner-box">{this.renderIcon(glogo, 13)}</div>
+            <div className="icon-inner-box">{this.renderIcon(iceman, 13)}</div>
           </div>
           <input
             
@@ -196,6 +207,32 @@ export default class IndexPage extends React.Component {
 
         </form>
         <br></br>
+        <div>
+          <table className="ui celled table">
+            <thead>
+              <tr>
+                  <th>Total Number of Websites</th>
+                  <th>Total Number of Unique Words</th>
+                  <th>Total Number of Index Time</th>
+                  <th>Total Number of User Search Query</th>
+
+              </tr>
+            
+            </thead>
+            <tbody>
+              
+          {this.state.total.map(total =>
+          <tr>
+            <td data-label="Result">{total.websites}</td>
+            <td data-label="Search">{total.uniquewords}</td>
+            <td data-label="Time">{total.indextime}</td>
+            <td data-label="Query">{total.searchquery}</td>
+          </tr>)}
+      
+          
+            </tbody>
+          </table>
+        </div>
         
         <div>
           <table className="ui celled table">
