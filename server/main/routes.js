@@ -23,8 +23,12 @@ router.get('/api/search/listurl' ,(req,ress)=>{
 
 })
 router.get('/api/search/terms' ,(req,ress)=>{
-    db.pool.query(`SELECT terms,count,search_date,time_to_search from search WHERE count > 0
-    order by terms desc LIMIT 5`,(err,res) =>{
+    db.pool.query(`SELECT terms,count,search_date,time_to_search 
+                    FROM search 
+                    WHERE count > 0
+                    ORDER BY search_date desc 
+                    LIMIT 5`,
+        (err,res) =>{
         if (err) {
             console.log(err.stack)
         } else {
