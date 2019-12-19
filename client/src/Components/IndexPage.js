@@ -268,7 +268,7 @@ export default class IndexPage extends React.Component {
           <tr>
             <td data-label="Term">{item.terms}</td>
             <td data-label="Freq">{item.count}</td>
-            <td data-label="Freq">{item.search_date}</td>
+            <td data-label="Data">{item.search_date}</td>
            
           </tr>)}
             </tbody>
