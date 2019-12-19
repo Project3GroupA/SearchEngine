@@ -29,7 +29,7 @@ CREATE TABLE search(
 	search_id SERIAL,
 	terms TEXT,
 	count INTEGER,
-	search_date DATE,
+    search_date DATE DEFAULT CURRENT_DATE,
 	time_to_search DOUBLE PRECISION,
 	PRIMARY KEY (search_id)
 );
