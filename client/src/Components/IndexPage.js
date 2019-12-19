@@ -171,7 +171,7 @@ export default class IndexPage extends React.Component {
         <div className="row h-100">
           <div className="col-sm-12">
             <div className="d-flex justify-content-center"> 
-              <div className="col-12 mt-3">
+              <div className="col-12 mt-3 ">
         
           {/* {console.log("Value "+ this.state.listUrl)}
           {console.log("Value "+ this.state.listTime)}
@@ -185,7 +185,7 @@ export default class IndexPage extends React.Component {
           {this.state.tableData.map(item =>
           <li>{item.url}</li>)}
         </ul> */}
-        <div className="col-12 text-center mt-3">
+      
         <form onSubmit={this.handleSubmit}
           className={
             this.state.searchPosTop
@@ -207,73 +207,63 @@ export default class IndexPage extends React.Component {
           />
 
         </form>
-        </div>
+       
         <br></br>
-        <div>
+        
           <table className="ui celled table">
             <thead>
               <tr>
                   <th>Total Number of Websites</th>
                   <th>Total Number of Unique Words</th>
-                  <th>Total Number of Index Time</th>
                   <th>Total Number of User Search Query</th>
+                  <th>Total Number of Index Time</th>
 
               </tr>
-            
             </thead>
-            <tbody>
-              
+            <tbody>    
           {this.state.total.map(total =>
           <tr>
             <td data-label="Result">{total.websites}</td>
             <td data-label="Search">{total.uniquewords}</td>
-            <td data-label="Time">{total.indextime}</td>
             <td data-label="Query">{total.searchquery}</td>
+            <td data-label="Time">{total.indextime}</td>
           </tr>)}
-      
-          
             </tbody>
           </table>
-        </div>
+      
         
-        <div>
+      
           <table className="ui celled table">
             <thead>
               <tr>
                   <th>Number of Results</th>
                   <th>User Search</th>
                   <th>Time</th>
-              </tr>
-            
+              </tr>       
             </thead>
-            <tbody>
-              
+            <tbody>             
           {this.state.tableData.map(item =>
           <tr>
             <td data-label="Result">{item.page_id}</td>
             <td data-label="Search">{item.url}</td>
             <td data-label="Time">{item.time_to_index}</td>
-          </tr>)}
-      
-          
+          </tr>)}      
             </tbody>
           </table>
-        </div>
+        
         <br></br>
 
-        <div>
+        
           <table className="ui celled table">
             <thead>
               <tr>
                   <th>Term</th>
-                  <th>Number of Occurances</th>
+                  <th>Number of Results</th>
                   <th>Search Date</th>
                  
-              </tr>
-            
+              </tr>         
             </thead>
-            <tbody>
-              
+            <tbody>          
           {this.state.terms.map(item =>
           <tr>
             <td data-label="Term">{item.terms}</td>
@@ -281,16 +271,14 @@ export default class IndexPage extends React.Component {
             <td data-label="Freq">{item.search_date}</td>
            
           </tr>)}
-      
-          
             </tbody>
           </table>
-        </div>
+        
       
       </div>
-      </div>
-      </div>
-      </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
