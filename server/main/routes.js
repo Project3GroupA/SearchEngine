@@ -26,7 +26,7 @@ router.get('/api/search/terms' ,(req,ress)=>{
     db.pool.query(`SELECT terms,count,search_date,time_to_search 
                     FROM search 
                     WHERE count > 0
-                    ORDER BY search_date desc 
+                    ORDER BY search_id desc 
                     LIMIT 5`,
         (err,res) =>{
         if (err) {
