@@ -3,45 +3,59 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const pool = new Pool({
-  user: process.env.user,
-  host: process.env.host,
-  database: process.env.database,
-  password: process.env.password,
-  ssl: true,
+  user: 'nzeas',
+  host: 'localhost',
+  database: 'cs355db',
+  password: '2493',
   post: 5432
-  
 })
 
 
-  const search = (request, response) => {
+const search = (request, response) => {
 
-      let searchQuery = request.query.searchQuery;
-      let q = `select pg.url, pg.title, pg.description,  Count(w.word_name)
-      from page_word as pw
-      left join page as pg
-      on pw.page_id = pg.page_id
-      left join word as w
-      on pw.word_id = w.word_id
-      where w.word_name like $1
-      group by pg.url, pg.title, pg.description, pw.freq, w.word_name
-      order by pg.url`;
+  let searchStart = new Date().getTime() / 1000;
 
-      pool.query(q, [searchQuery], (err, res) => {
-        if( res ){
-         let items = [];
-          for( let i = 0; i < res.rows.length; i++ ){
-            let item = {
-              title   : res.rows[i].title,
-              link    : res.rows[i].url,
-              snippet : res.rows[i].description,
-            }
-            items.push(item);
-          }
-          let jsonObj = JSON.stringify(items);
-          response.json(`{"items":${jsonObj}}`);
+  let searchQuery = request.query.searchQuery;
+  let q = `select pg.url, pg.title, pg.description,  Count(w.word_name)
+  from page_word as pw
+  left join page as pg
+  on pw.page_id = pg.page_id
+  left join word as w
+  on pw.word_id = w.word_id
+  where w.word_name like $1
+  group by pg.url, pg.title, pg.description, pw.freq, w.word_name
+  order by pg.url`;
+
+  pool.query(q, [searchQuery], (err, res) => {
+    if( res ){
+     let items = [];
+      for( let i = 0; i < res.rows.length; i++ ){
+        let item = {
+          title   : res.rows[i].title,
+          link    : res.rows[i].url,
+          snippet : res.rows[i].description,
         }
-      })
-  }
+        items.push(item);
+      }
+      let jsonObj = JSON.stringify(items);
+      response.json(`{"items":${jsonObj}}`);
+      
+      
+      let searchEnd = new Date().getTime() / 1000;
+      let numOfResults = res.rowCount;
+      let searchTime = searchEnd-searchStart;
+
+      let searchInsert = `INSERT INTO search (terms, count, time_to_search)
+                values($1, $2, $3)`;
+      pool.query(searchInsert, [searchQuery, numOfResults, searchTime], (err, res) =>{
+        if( err ){
+          console.log(err);
+        }
+      });
+
+    }
+  })
+}
 
   const insertPage = (page, callback) => {
     let values = [

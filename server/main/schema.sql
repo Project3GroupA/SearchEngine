@@ -30,7 +30,7 @@ CREATE TABLE search(
 	terms TEXT,
 	count INTEGER,
 	search_date DATE,
-	time_to_search INTEGER,
+	time_to_search DOUBLE PRECISION,
 	PRIMARY KEY (search_id)
 );
 
