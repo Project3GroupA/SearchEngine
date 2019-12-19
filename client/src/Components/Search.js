@@ -13,7 +13,6 @@ export default class GSearch extends React.Component {
     this.state = {
       searchResults: null,
       searchQuery: null,
-      nextPageIndex : 1,
       nextPageBtn : null,   //button to request next page from google
       isChecked: new Array(100).fill(false), //Googel search API does not allow more than 100 results
       isAllChecked : false,  //to check/uncheck all button
@@ -27,7 +26,6 @@ export default class GSearch extends React.Component {
       this.setState({
           searchQuery : this.props.googleSearchQuery,
           nextPageBtn : fetch ? true : false,
-          nextPageIndex : 1,
           searchResults  : null,
           isAllChecked : false,
           isChecked : Array(100).fill(false),
@@ -51,11 +49,6 @@ export default class GSearch extends React.Component {
         return;
       }
       this.parseUploadedData(this.props.fileName, this.props.uploadedData );
-    }
-    //re fetch data if the next page is requested
-    else if(this.state.nextPageIndex !== prevState.nextPageIndex){
-      if( this.state.searchResults )
-        this.fetchData()   
     }
   }
 
@@ -97,18 +90,6 @@ export default class GSearch extends React.Component {
     
   }
 
-  //To request the next page from Google
-  setNextPage = () => {
-    let nextPageIndex = this.state.nextPageIndex;
-    if( nextPageIndex !== 91 ){ //google does not allow to search for mare than 100 results
-      nextPageIndex += 10;
-      this.setState( {
-        isAllChecked : false,
-        nextPageIndex : nextPageIndex
-      });
-    }
-    
-  }
 
   //make the API call
   fetchData(props){
@@ -466,21 +447,13 @@ export default class GSearch extends React.Component {
   } 
 
   
-  renderNextPgBtn(){
+  renderEndOfFile(){
     //To render "End Of File" when a file was uploaded
     if( !this.state.nextPageBtn && this.state.searchResults ){
       return <div className="col-12 text-center mt-3">End Of File</div>;
     }
-    //To render a button if the user searched on Google
-    if( this.state.searchResults ){
-      return (
-          <div className='col-12 d-flex justify-content-center m-2'>  
-            <button onClick={this.setNextPage}>
-              {"load next page"}
-            </button>
-          </div>
-          );
-      }
+    else
+      return <div className="col-12 text-center mt-3"></div>
   }
 
   //render everything
@@ -488,7 +461,7 @@ export default class GSearch extends React.Component {
     return (
       <div className='row'>
         {this.setResults()}
-        {this.renderNextPgBtn()}
+        {this.renderEndOfFile()}
       </div>
     );
   }
