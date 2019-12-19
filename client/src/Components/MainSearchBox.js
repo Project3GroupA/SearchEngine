@@ -15,7 +15,7 @@ class MainSearchBox extends React.Component{
       searchPosTop : false,
       googleSearchQuery : '',
       renderTechStack : true,
-      errorMsg: "ONLY QCSV FORMAT SUPPORTED!"
+      errorMsg: ""
     }
 
     this.inputString = '';
