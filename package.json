@@ -34,5 +34,14 @@
     "react"
   ],
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^1.19.3",
+    "sequelize-cli": "^5.5.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "/client"
+    ]
+  }
 }
