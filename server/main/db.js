@@ -13,19 +13,22 @@ const pool = new Pool({
 
 const search = (request, response) => {
 
-  let searchStart = new Date().getTime() / 1000;
-
   let searchQuery = request.query.searchQuery;
-  let q = `select pg.url, pg.title, pg.description,  Count(w.word_name)
-  from page_word as pw
-  left join page as pg
-  on pw.page_id = pg.page_id
-  left join word as w
-  on pw.word_id = w.word_id
-  where w.word_name like $1
-  group by pg.url, pg.title, pg.description, pw.freq, w.word_name
-  order by pg.url`;
 
+  searchQuery = parseSearchKey(searchQuery);
+  
+  let q = `SELECT pg.url, pg.title, pg.description,  COUNT(w.word_name), SUM(pw.freq) as frequency
+          FROM page_word AS pw
+          LEFT JOIN page AS pg
+          ON pw.page_id = pg.page_id
+          LEFT JOIN word AS w
+          ON pw.word_id = w.word_id
+          WHERE w.word_name SIMILAR TO LOWER($1)
+          GROUP BY pg.url, pg.title, pg.description
+          ORDER BY frequency DESC
+          LIMIT 50`;
+
+  let searchStart = new Date().getTime() / 1000;
   pool.query(q, [searchQuery], (err, res) => {
     if( res ){
      let items = [];
@@ -45,8 +48,7 @@ const search = (request, response) => {
       let numOfResults = res.rowCount;
       let searchTime = searchEnd-searchStart;
 
-      let searchInsert = `INSERT INTO search (terms, count, time_to_search)
-                values($1, $2, $3)`;
+      let searchInsert = `INSERT INTO search (terms, count, time_to_search) values($1, $2, $3)`;
       pool.query(searchInsert, [searchQuery, numOfResults, searchTime], (err, res) =>{
         if( err ){
           console.log(err);
@@ -54,8 +56,29 @@ const search = (request, response) => {
       });
 
     }
+    else{
+      console.log(err);
+      
+    }
   })
 }
+
+  function parseSearchKey(searchKey){
+
+    if( !searchKey ){
+      return '';
+    }
+    let formattedKey = "";
+    let searchKeySplit = searchKey.split(' ');
+    let i = 0;
+    for( ; i < searchKeySplit.length-1; i++ ){
+      formattedKey += '%'+searchKeySplit[i]+'%|';
+    }
+    return formattedKey += '%'+searchKeySplit[i]+'%';
+  }
+
+
+
 
   const insertPage = (page, callback) => {
     let values = [

@@ -146,12 +146,12 @@ function countWordFrequency($){
 
 function getAllWords($){
 	let h1 = "";
-    let h2 = "";
-    let h3 = "";
-    let h4 = "";
-    let h5 = "";
-    let h6 = "";
-	let p  = "";
+    // let h2 = "";
+    // let h3 = "";
+    // let h4 = "";
+    // let h5 = "";
+    // let h6 = "";
+	// let p  = "";
 
 	let title = clean($("title").text());
 	let description = clean($('meta[name="description"]').attr('content'));
@@ -160,19 +160,19 @@ function getAllWords($){
         h1 += $(this).text() + " ";
 	});
 	
-    $("h2").each(function () {
-        h2 += $(this).text() + " ";
-	});
+    // $("h2").each(function () {
+    //     h2 += $(this).text() + " ";
+	// });
 	
-    $("h3").each(function () {
-        h3 += $(this).text() + " ";
-	});
+    // $("h3").each(function () {
+    //     h3 += $(this).text() + " ";
+	// });
 	
-    $("p").each(function () {
-        p += $(this).text() + " ";
-	});
+    // $("p").each(function () {
+    //     p += $(this).text() + " ";
+	// });
 	
-    let allwords = h1 + h2 + h3 + h4 + h5 + h6 + p + title + description;
+    let allwords = h1 + title + description; //+ h2 + h3 + h4 + h5 + h6 + p + 
     return allwords;
 }
 
