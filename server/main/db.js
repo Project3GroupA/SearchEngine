@@ -14,7 +14,7 @@ const pool = new Pool({
 const search = (request, response) => {
 
   let searchQuery = request.query.searchQuery;
-
+  let rawSeachQuery = searchQuery;
   searchQuery = parseSearchKey(searchQuery);
   
   let q = `SELECT pg.url, pg.title, pg.description,  COUNT(w.word_name), SUM(pw.freq) as frequency
@@ -49,7 +49,7 @@ const search = (request, response) => {
       let searchTime = searchEnd-searchStart;
 
       let searchInsert = `INSERT INTO search (terms, count, time_to_search) values($1, $2, $3)`;
-      pool.query(searchInsert, [searchQuery, numOfResults, searchTime], (err, res) =>{
+      pool.query(searchInsert, [rawSeachQuery, numOfResults, searchTime], (err, res) =>{
         if( err ){
           console.log(err);
         }
